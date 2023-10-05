@@ -1,0 +1,78 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="description" content="Canvas: Interaktivitet">
+    <meta name="author" content="Stina TEINF21">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="index.css">
+    <title></title>
+</head>
+<body>
+    
+    <div class="nav-bar">
+        <a class="active" href="startsida.html">Startsida</a>
+        <a class="upgft nr2" href="upgft2.html">Uppgift Nr.2</a>
+        <a class="upgft nr3" href="upgft3.html">Uppgift Nr.3</a>
+        <a class="upgft nr4" href="upgft4.html">Uppgift Nr.4</a>
+    </div>
+
+    <h1>Övningar: Javascript - Interaktivitet</h1>
+    <canvas id="myCanvas" width="750" height="650" style="border:2px solid skyblue"></canvas>
+
+<script>
+    var canvas = document.getElementById("myCanvas");
+    var ctx = canvas.getContext("2d");
+
+    var rektangel = 
+    {
+        x: canvas.width / 2 - 25,
+        y: canvas.height / 2 - 25,
+        width: 40,
+        height: 40,
+        color: "skyblue",
+        hastighet: 5,
+    };
+
+    document.addEventListener("keydown", function (e)
+    {
+        switch(e.key)
+        {
+            case "ArrowLeft":
+                rektangel.x -= rektangel.hastighet;
+                break;
+
+            case "ArrowRight":
+                rektangel.y += rektangel.hastighet;
+                break;
+            
+            case "ArrowUp":
+                rektangel.y -= rektangel.hastighet;
+                break;
+
+            case "ArrowDown":
+                rektangel.y += rektangel.hastighet;
+                break;
+        }
+    })
+
+    function ritaRektangel()
+    {
+        ctx.clearRect(0, 0, canvas.width, canvas.height);
+        ctx.fillStyle = rektangel.color;
+        ctx.fillRect(rektangel.x, rektangel.y, rektangel.width, rektangel.height);
+    }
+
+    function update()
+    {
+        ritaRektangel();
+        requestAnimationFrame(update);
+    }
+
+    update();
+
+
+</script>
+
+</body>
+</html>
